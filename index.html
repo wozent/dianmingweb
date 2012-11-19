@@ -1,8 +1,7 @@
+<!DOCTYPE HTML>
 <html>
 
 	<head>
-
-		<!-- People do NOT simply copy others' site. //Lucas// -->
 
 		<meta charset="utf-8" /> 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,7 +12,6 @@
 		<meta name="keywords" content=""/>
 	    <meta name="description" content="" />
 	    <meta name="author" content="" />   
-	    
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		
 		<!-- Let's do something with the fucking IEs //Lucas// -->
@@ -21,29 +19,50 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>  
 		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>  
 		<![endif]--> 
-		
 		<!--[if lt IE 7]>
 	    <p class="chromeframe">You are using an outdated browser. <a href="ie7-upgrade/index.php">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 	    <![endif]-->
+		<!-- I say if IE we crash that guy's computer -->
 		
-		<title>HuaiXueSheng Index.html</title>
-
-		<script src="scripts/jquery.min.js" type="text/javascript"></script>
-		<!-- Push the latest version of 1.8.2 jQuery.min.js here -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
-		<script src="scripts/backbone-min.js" type="text/javascript"></script>
+		<title>HuaiXueSheng</title>
 		
 		<link href="style/css/global.css" rel="stylesheet" type="text/css">
-		
-		<!-- Add APIs here //Lucas// -->
+
 		
 	</head>
 
 	<body>
 	
-		<!-- Feel free to delete those two divs lol. //Lucas// -->
 		<div><h1>TEST</h1></div>
-		<div id="testpicture"></div>
+		<div id="initTest">
+			<h4>province</h4><input id = "provinceValue" />
+			<h4>city</h4><input id = "cityValue" />
+			<h4>region</h4><input id = "regionValue" />
+			<h4>school</h4><input id = "schoolValue" />
+			<h4>date : 1970/1/1/</h4>
+			<h4>user name</h4><input id = "userNameValue" />
+			<h4>password</h4><input id = "passwordValue" />
+			<h4>male : true </h4>
+			<h4>content</h4><input id = "contentValue" />
+			<h4>phone</h4><input id = "phoneValue" />
+			<h4>email</h4><input id = "emailValue" />
+			<h4>qq</h4><input id = "qqValue" />
+			<h4>self define</h4><input id = "selfDefinedValue" />
+			<h4>price</h4><input id = "priceValue" />
+			<h4>looking for / helping ?: looking for</h4>
+
+			<button id = "submitClick">Click me </button>
+		</div>
+
+				
+		<script src="scripts/lib/jquery-1.7.1.min.js" type="text/javascript"></script>
+		<script src="scripts/lib/underscore-min.js" type="text/javascript"></script>
+		<script src="scripts/lib/backbone-min.js" type="text/javascript"></script>
+		
+
+		<script src="scripts/model/Message.js" type="text/javascript"></script>
+		<script src="scripts/view/MessageView.js" type="text/javascript"></script>
+		<script src="scripts/main.js" type="text/javascript"></script>
 		
 	</body>
 </html>
