@@ -1,26 +1,26 @@
 var MessageView = Backbone.View.extend({
-	el:$('#initTest'),
+	el:$('#postTest'),
 
 	events:{
-		'click button#submitClick':'submitClick',
+		'click button#POSTsubmitClick':'POSTsubmitClick',
 	},
 
 
 	initialize:function(messages){
-		_.bindAll(this, 'submitClick');
+		_.bindAll(this, 'POSTsubmitClick');
 		this.messages = messages;  
 	},
 
-	submitClick:function(){
-		alert("submitClick events fired");
+	POSTsubmitClick:function(){
+		alert("POSTsubmitClick event fired");
 		var newMessage = new Message();
-		var locationString = $('#provinceValue').val() + " " + $('#cityValue').val() + " " + $('#regionValue').val() + " " + $('#schoolValue').val();
+		var locationString = $('#POSTprovinceValue').val() + " " + $('#POSTcityValue').val() + " " + $('#POSTregionValue').val() + " " + $('#POSTschoolValue').val();
 
 		var date = new Date();
-		newMessage.set({'userName' : $('#userNameValue').val(), 'password' : $('#passwordValue').val(), 'date' : date.getFullYear() + " " + date.getMonth() + " " + date.getDate(),
-        'location' : locationString, 'isMale' : true, 'content' : $('#contentValue').val(),
-        'email' : $('#emailValue').val(), 'phone' : $('#phoneValue').val(), 'qq' : $('#qqValue').val(), 'selfDefined' : $('#selfDefinedValue').val(),
-        'price' : Number($('#priceValue').val()), 'type' : 0});
+		newMessage.set({'userName' : $('#POSTuserNameValue').val(), 'password' : $('#POSTpasswordValue').val(), 'date' : date.getFullYear() + " " + date.getMonth() + " " + date.getDate(),
+        'location' : locationString, 'isMale' : true, 'content' : $('#POSTcontentValue').val(),
+        'email' : $('#POSTemailValue').val(), 'phone' : $('#POSTphoneValue').val(), 'qq' : $('#POSTqqValue').val(), 'selfDefined' : $('#POSTselfDefinedValue').val(),
+        'price' : Number($('#POSTpriceValue').val()), 'type' : Number($('#POSTphoneValue').val())});
 
 		var self = this;
 		newMessage.save(
