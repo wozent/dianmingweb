@@ -82,75 +82,25 @@
 			<h4>email</h4><input id = "GETemailValue" />
 			<h4>qq</h4><input id = "GETqqValue" />
 			<h4>self define</h4><input id = "GETselfDefinedValue" />
-
-			<table border="1">
-				<tr>
-					<td>id</td>
-					<td><p id = "ResultidValue"></p></td>
-				</tr>
-				<tr>
-					<td>city</td>
-					<td><p id = "ResultcityValue"></p></td>
-				</tr><tr>
-					<td>region</td>
-					<td><p id = "ResultregionValue"></p></td>
-				</tr><tr>
-					<td>school</td>
-					<td><p id = "ResultshcoolValue"></p></td>
-				</tr><tr>
-					<td>date</td>
-					<td><p id = "ResultdateValue"></p></td>
-				</tr><tr>
-					<td>userName</td>
-					<td><p id = "ResultuserNameValue"></p></td>
-				</tr><tr>
-					<td>password</td>
-					<td><p id = "ResultpasswordValue"></p></td>
-				</tr>
-				<tr>
-					<td>gender</td>
-					<td><p id = "ResultgenderValue"></p></td>
-				</tr>
-				<tr>
-					<td>content</td>
-					<td><p id = "ResultcontentValue"></p></td>
-				</tr>
-				<tr>
-					<td>phone</td>
-					<td><p id = "ResultphoneValue"></p></td>
-				</tr>
-				<tr>
-					<td>email</td>
-					<td><p id = "ResultemailValue"></p></td>
-				</tr>
-				<tr>
-					<td>qq</td>
-					<td><p id = "ResultqqValue"></p></td>
-				</tr>
-				<tr>
-					<td>self define</td>
-					<td><p id = "ResultselfDefinedValue"></p></td>
-				</tr>
-				<tr>
-					<td>price</td>
-					<td><p id = "ResultpriceValue"></p></td>
-				</tr>
-				<tr>
-					<td>type</td>
-					<td><p id = "ResulttypeValue"></p></td>
-				</tr>
-			</table>
+			<br />
+			<button id = "GETsubmitClick">Click to search </button>
+			<button id = "GETclearClick">Click to clear </button>
+			<div id = "ResultContainer">
+				
+			</div>
 		
 		</div>
 
 				
 		<script src="scripts/lib/jquery-1.7.1.min.js" type="text/javascript"></script>
-		<script src="scripts/lib/underscore-min.js" type="text/javascript"></script>
+		<script src="scripts/lib/underscore-min.js" type="text/javascript"></script>	
 		<script src="scripts/lib/backbone-min.js" type="text/javascript"></script>
 	
 
 		<script src="scripts/model/Message.js" type="text/javascript"></script>
 		<script src="scripts/view/MessageView.js" type="text/javascript"></script>
+		<script src="scripts/view/ResultView.js" type="text/javascript"></script>
+		<script src="scripts/testUtilities.js" type="text/javascript"></script>
 		<script src="scripts/main.js" type="text/javascript"></script>
 
 	

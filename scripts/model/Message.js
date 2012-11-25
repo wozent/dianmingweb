@@ -5,7 +5,7 @@ var Message = Backbone.Model.extend({
 
         "userName" : "defaultUserName",
         "password" : "defaultPassword",
-        "date" : 0,
+        "date" : "0 0 0",	
         "location" : "default default default default",
         "isMale" : true,
         "content" : "defaultContent",
