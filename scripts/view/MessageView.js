@@ -88,12 +88,12 @@ var MessageView = Backbone.View.extend({
 								console.log("DELETE succeeded");
 								console.log(model.get('id'));
 								self.messages.remove(thisMessage);
-								alert("PUT Success: congradualations");
+								alert("DELETE Success: congradualations");
 							},
 							
 							error: function(){
 								console.log("DELETE failed");
-								alert("PUT Error: check server configuration");
+								alert("DELETE Error: check server configuration");
 							}
 						});
 
@@ -105,7 +105,7 @@ var MessageView = Backbone.View.extend({
 		var emailValue = $('#GETemailValue').val();
 		var qqValue = $('#GETqqValue').val();
 		var selfDefinedValue = $('#GETselfDefinedValue').val();
-
+		var self = this;
 		this.tempMessages.fetch({
 				data: $.param({ phone: phoneValue, email: emailValue, qq: qqValue, selfDefined: selfDefinedValue}),
 		
@@ -114,7 +114,7 @@ var MessageView = Backbone.View.extend({
 		        success: function (model, response) {
 		            console.log("GET success"); 
 		            console.log(response);
-		            mainInit();
+
 		        },
 		        
 				error: function(model, response){
@@ -126,7 +126,8 @@ var MessageView = Backbone.View.extend({
 			});
 
 		for (var i = 0; i < this.tempMessages.length; i++){
-			this.tempMessagesArray.push(new ResultView(this.tempMessages.at(i))); 
+			utils.loadTemplate(new ResultView(this.tempMessages.at(i)), self.tempMessagesArray.push(new ResultView(this.tempMessages.at(i))));
+			 
 		}
 
 
