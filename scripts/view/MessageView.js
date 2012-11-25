@@ -3,6 +3,7 @@ var MessageView = Backbone.View.extend({
 
 	events:{
 		'click button#POSTsubmitClick':'POSTsubmitClick',
+		'click button#PUTsubmitClick':'PUTsubmitClick',
 		'click button#DELETEsubmitClick':'DELETEsubmitClick',
 		'click button#GETsubmitClick':'GETsubmitClick',
 		'click button#GETclearClick':'GETclearClick',
@@ -10,7 +11,7 @@ var MessageView = Backbone.View.extend({
 
 
 	initialize:function(messages){
-		_.bindAll(this, 'POSTsubmitClick','PUTsubmitClick', 'DELETEsubmitClick', 'GETsubmitClick', 'GETclearClick');
+		_.bindAll(this, 'POSTsubmitClick','PUTsubmitClick', 'DELETEsubmitClick', 'GETsubmitClick', 'GETclearClick', 'findById');
 		this.messages = messages;  
 		this.tempMessages = new Messages();
 		this.tempMessagesArray =  new Array();
@@ -46,8 +47,11 @@ var MessageView = Backbone.View.extend({
 
 	PUTsubmitClick:function(){
 		alert("PUTsubmitClick event fired");
-		var id = $('#PUTidValue');
+		var id = $('#PUTidValue').val();
+		console.log("target: " + id);
+
 		var thisMessage = this.messages.get(id);
+		
 
 		var locationString = $('#PUTprovinceValue').val() + " " + $('#PUTcityValue').val() + " " + $('#PUTregionValue').val() + " " + $('#PUTschoolValue').val();
 
@@ -75,7 +79,7 @@ var MessageView = Backbone.View.extend({
 
 	DELETEsubmitClick:function(){
 		alert("DELETEsubmitClick event fired");
-		var id = $('#DELETEidValue');
+		var id = $('#DELETEidValue').val();
 		var thisMessage = this.messages.get(id);
 
 		var self = this;
@@ -83,6 +87,7 @@ var MessageView = Backbone.View.extend({
 							success:function(model, response){
 								console.log("DELETE succeeded");
 								console.log(model.get('id'));
+								self.messages.remove(thisMessage);
 								alert("PUT Success: congradualations");
 							},
 							
@@ -133,6 +138,15 @@ var MessageView = Backbone.View.extend({
 		}
 		$('#ResultContainer').empty()
 	},
+
+	findById:function(id){
+		this.messages.each(function(message){
+			console.log("current : " + id);
+			if (message.id == id){
+				return message;
+			}
+		});
+	}
 
 
 });
