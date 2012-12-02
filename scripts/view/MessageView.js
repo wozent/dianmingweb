@@ -7,25 +7,30 @@ var MessageView = Backbone.View.extend({
 		'click button#DELETEsubmitClick':'DELETEsubmitClick',
 		'click button#GETsubmitClick':'GETsubmitClick',
 		'click button#GETclearClick':'GETclearClick',
+		'click button#primarySearchSubmitClick':'primarySearchSubmitClick',
+		'click button#primarySearchClearClick':'primarySearchClearClick',
+		'click button#authSubmitClick':'authSubmitClick',
 	},
 
 
 	initialize:function(messages){
-		_.bindAll(this, 'POSTsubmitClick','PUTsubmitClick', 'DELETEsubmitClick', 'GETsubmitClick', 'GETclearClick', 'findById');
+		_.bindAll(this, 'POSTsubmitClick','PUTsubmitClick', 'DELETEsubmitClick', 'GETsubmitClick', 'GETclearClick', 'primarySearchSubmitClick', 'primarySearchClearClick', 'findById');
 		this.messages = messages;  
 		this.tempMessages = new Messages();
-		this.tempMessagesArray =  new Array();
+		this.tempMessagesArray =  new Array();    //used to store views
+		this.passwordMessage = new Message("/api/badstudent/v0.9/auth");
+		this.primarySearchResult = new Messages("/api/badstudent/v0.9/primarySearch");
 	},
 
 	POSTsubmitClick:function(){
 		alert("POSTsubmitClick event fired");
 		var newMessage = new Message();
-		var locationString = $('#POSTprovinceValue').val() + " " + $('#POSTcityValue').val() + " " + $('#POSTregionValue').val() + " " + $('#POSTschoolValue').val();
+		var locationString = $('#POSTprovinceValue').val() + " " + $('#POSTcityValue').val() + " " + $('#POSTschoolValue').val();
 
 		var date = new Date();
 		newMessage.set({'userName' : $('#POSTuserNameValue').val(), 'password' : $('#POSTpasswordValue').val(), 'date' : date.getFullYear() + " " + date.getMonth() + " " + date.getDate(),
         'location' : locationString, 'isMale' : true, 'content' : $('#POSTcontentValue').val(),
-        'email' : $('#POSTemailValue').val(), 'phone' : $('#POSTphoneValue').val(), 'qq' : $('#POSTqqValue').val(), 'selfDefined' : $('#POSTselfDefinedValue').val(),
+        'email' : $('#POSTemailValue').val(), 'phone' : $('#POSTphoneValue').val(), 'qq' : $('#POSTqqValue').val(), 'twitter' : $('#POSTtwitterValue').val(), 'selfDefined' : $('#POSTselfDefinedValue').val(),
         'price' : Number($('#POSTpriceValue').val()), 'type' : Number($('#POSTtypeValue').val())});
 
 		var self = this;
@@ -53,12 +58,12 @@ var MessageView = Backbone.View.extend({
 		var thisMessage = this.messages.get(id);
 		
 
-		var locationString = $('#PUTprovinceValue').val() + " " + $('#PUTcityValue').val() + " " + $('#PUTregionValue').val() + " " + $('#PUTschoolValue').val();
+		var locationString = $('#PUTprovinceValue').val() + " " + $('#PUTcityValue').val() + " " + $('#PUTschoolValue').val();
 
 		var date = new Date();
 		thisMessage.set({'userName' : $('#PUTuserNameValue').val(), 'password' : $('#PUTpasswordValue').val(), 'date' : date.getFullYear() + " " + date.getMonth() + " " + date.getDate(),
         'location' : locationString, 'isMale' : true, 'content' : $('#PUTcontentValue').val(),
-        'email' : $('#PUTemailValue').val(), 'phone' : $('#PUTphoneValue').val(), 'qq' : $('#PUTqqValue').val(), 'selfDefined' : $('#PUTselfDefinedValue').val(),
+        'email' : $('#PUTemailValue').val(), 'phone' : $('#PUTphoneValue').val(), 'qq' : $('#PUTqqValue').val(), 'twitter' : $('#PUTtwitterValue').val(), 'selfDefined' : $('#PUTselfDefinedValue').val(),
         'price' : Number($('#PUTpriceValue').val()), 'type' : Number($('#PUTtypeValue').val())});
 
 		var self = this;
@@ -137,8 +142,68 @@ var MessageView = Backbone.View.extend({
 		for (var i = 0; i < this.tempMessagesArray.length; i++){
 			this.tempMessagesArray[i].removeView();
 		}
+		this.tempMessages.reset();
 		$('#ResultContainer').empty()
 	},
+
+	primarySearchSubmitClick:function(){
+		var locationString = $('#primarySearchProvinceValue').val() + " " + $('#primarySearchCityValue').val() + " " + $('#primarySearchSchoolValue').val();
+		var date = new Date();
+		var dateString = date.getFullYear() + " " + date.getMonth() + " " + date.getDate();
+
+		this.primarySearchResult.fetch({
+				data: $.param({ location: locationString, date: dateString}),
+		
+				dataType:'json',
+				
+		        success: function (model, response) {
+		            console.log("GET success"); 
+		            console.log(response);
+
+		        },
+		        
+				error: function(model, response){
+					console.log("GET failed");
+					console.log(response);
+					alert("failed to GET data from server");
+				}
+
+			});
+
+
+	}
+
+	primarySearchClearClick:function(){
+		this.primarySearchResult.reset();
+	}
+
+	authSubmitClick:function(){
+		var idValue = $('#authIdValue').val();
+		var passwordValue = $('#authPasswordValue').val();
+		var self = this;
+
+		this.passwordMessage.fetch({
+				data: $.param({id: idValue, password : passwordValue}),
+		
+				dataType:'json',
+				
+		        success: function (model, response) {
+		            console.log("GET success"); 
+		            console.log(response);
+		            self.messages.get(idValue).set({'authCode':response.authCode});
+		            console.log(self.messages.get(idValue));
+		        },
+		        
+				error: function(model, response){
+					console.log("GET failed");
+					console.log(response);
+					alert("failed to GET data from server");
+				}
+
+			});
+	}
+
+
 
 	findById:function(id){
 		this.messages.each(function(message){
