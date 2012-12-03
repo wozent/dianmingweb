@@ -170,12 +170,11 @@ var MessageView = Backbone.View.extend({
 
 			});
 
-
-	}
+	},
 
 	primarySearchClearClick:function(){
 		this.primarySearchResult.reset();
-	}
+	},
 
 	authSubmitClick:function(){
 		var idValue = $('#authIdValue').val();
@@ -201,7 +200,7 @@ var MessageView = Backbone.View.extend({
 				}
 
 			});
-	}
+	},
 
 
 
@@ -212,7 +211,7 @@ var MessageView = Backbone.View.extend({
 				return message;
 			}
 		});
-	}
+	},
 
 
 });

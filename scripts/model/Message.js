@@ -16,14 +16,14 @@ var Message = Backbone.Model.extend({
         "selfDefined" : "dafultSelfDefiend",
         "price" : 0.0,
         "type" : 0,
-        "authCode" : -1;
+        "authCode" : -1,
 	},
 
 	urlRoot: "http://localhost:8015/api/badstudent/v0.9/messages",
 
 	initialize:function(urlRootOverride){
 		_.bindAll(this, 'preSave', 'postSave');
-		console.log("creating schedule: "+ this.toJSON + " id: " + this.id);
+		console.log("creating message: "+ this.toJSON + " id: " + this.id);
 		if (urlRootOverride != null){
 			this.urlRoot = urlRootOverride;
 		}
