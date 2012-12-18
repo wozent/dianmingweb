@@ -1,0 +1,102 @@
+<html>	
+
+	<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+
+	<div id="locationTest">
+		<h4>province</h4>
+		<select id="province">
+  			<option value="">Please select</option>
+		</select>
+		<h4>city</h4>
+		<select id="city">
+  			<option value="">Please select</option>
+		</select>
+		<h4>school</h4>
+		<select id="school">
+  			<option value="">Please select</option>
+		</select>
+		<button id="locationSearch">Click to search location </button>
+	</div>	
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var province = document.getElementById("province");
+		var city = document.getElementById("city");
+		var school = document.getElementById("school");
+		$.ajax({
+			type: "GET",
+			async: false,
+			url: "http://localhost:8015/api/badstudent/v0.9/location",
+			dataType: 'json',
+			success: function(data){
+				for(each in data){
+					province[province.length] = new Option(data[each],data[each], false, false);
+				}
+				province.onchange = provinceChanged; 
+			},
+			error: function (data, textStatus, jqXHR){alert("An error occurred,try again later.");province.disabled=true;city.disabled=true;},
+		});
+	});
+	</script>
+
+	<script type="text/javascript">
+	function provinceChanged(e){
+		var index = e.target.selectedIndex;
+		var provinceName = e.target.options[index].value;
+		while(city.length!=1){
+			city.remove(city.length-1);
+		}
+		while(school.length!=1){
+			school.remove(school.length-1);
+		}
+		if(index===0){
+			return;
+		}
+		$.ajax({
+			type: "GET",
+			async: false,
+			data: {province : provinceName},
+			url: "http://localhost:8015/api/badstudent/v0.9/location",
+			dataType: 'json',
+			success: function(data){
+				for(each in data){
+					city[city.length] = new Option(data[each],data[each], false, false);
+				}
+				city.onchange = cityChanged;
+			},
+			error: function (data, textStatus, jqXHR){alert("An error occurred,try again later.");province.disabled=true;city.disabled=true;},
+		});
+	}
+	</script>
+
+	<script type="text/javascript">
+		function cityChanged(e){
+			var index = e.target.selectedIndex;
+			var cityName = e.target.options[index].value;
+			var provinceName = province.options[province.selectedIndex].value;
+			while(school.length!=1){
+				school.remove(school.length-1);
+			}
+			if(index===0){
+				return;
+			}
+
+			$.ajax({
+				type: "GET",
+				async: false,
+				data: { province: provinceName, city: cityName },
+				url: "http://localhost:8015/api/badstudent/v0.9/location",
+				dataType: 'json',
+				success: function(data){
+					for(each in data){
+						school[school.length] = new Option(data[each],data[each], false, false);
+					}
+				},
+				error: function (data, textStatus, jqXHR){alert("An error occurred,try again later.");province.disabled=true;city.disabled=true;},
+		 	});
+		}
+
+	</script>
+
+
+</html>
