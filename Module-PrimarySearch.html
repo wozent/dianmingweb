@@ -1,0 +1,40 @@
+﻿<html>
+	<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	
+
+	<h4 id="location">江苏省 南京市 南京农业大学</h4>
+	<select id="type">
+		<option value="0">ask</option>
+		<option value="1">help</option>
+	</select>
+	<p>Date: <input type="text" id="date" /></p>
+
+	<button id="click" onclick="search()">Click to search</button>
+
+	<script type="text/javascript">
+			$("#date").datepicker({ dateFormat: "yy mm dd", minDate: new Date()});
+		function search(){
+			var loc = "江苏省 南京市 南京农业大学";
+			var currentDate = $("#date").val();
+			var ty = document.getElementById("type").selectedIndex;
+			$.ajax({
+				type: "GET",
+				async: false,
+				data: {location: loc, date: currentDate, type: ty },
+				url: "http://localhost:8015/api/badstudent/v0.9/primarySearch",
+      			dataType: 'json',
+      			success: function(data){
+      				if(data==""){
+      					alert("No match");
+      				}
+      				for(each in data){
+      					alert("id: " + data[each].id + "\nstartDate: " + data[each].startDate + "\nendDate: " + data[each].endDate + "\ntype: " + data[each].type);
+      				}
+      			},
+     			error: function (data, textStatus, jqXHR){alert("An error occurred,try again later.");province.disabled=true;city.disabled=true;},
+   			});
+		}
+	</script>
+</html>
