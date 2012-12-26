@@ -28,10 +28,10 @@ var MessageView = Backbone.View.extend({
 		var locationString = $('#POSTprovinceValue').val() + " " + $('#POSTcityValue').val() + " " + $('#POSTschoolValue').val();
 
 		var date = new Date();
-		newMessage.set({'userName' : $('#POSTuserNameValue').val(), 'password' : $('#POSTpasswordValue').val(), 'startDate' : date.getFullYear() + " " + date.getMonth() + " " + date.getDate(), 'endDate' : date.getFullYear() + " " + date.getMonth() + " " + date.getDate(),
+		newMessage.set({'userName' : $('#POSTuserNameValue').val(), 'password' : $('#POSTpasswordValue').val(), 'startDate' : "2012 12 21", 'endDate' : "2012 12 31",
         'location' : locationString, 'gender' : 2, 'content' : $('#POSTcontentValue').val(),
         'email' : $('#POSTemailValue').val(), 'phone' : $('#POSTphoneValue').val(), 'qq' : $('#POSTqqValue').val(), 'twitter' : $('#POSTtwitterValue').val(), 'selfDefined' : $('#POSTselfDefinedValue').val(),
-        'price' : Number($('#POSTpriceValue').val()), "courseLengthInMinutes" : 0, 'authCode':-1, 'type' : Number($('#POSTtypeValue').val())});
+        'price' : Number($('#POSTpriceValue').val()), "courseLengthInMinutes" : 60, 'authCode':-1, 'type' : Number($('#POSTtypeValue').val())});
 
 		var self = this;
 		newMessage.save({},{
