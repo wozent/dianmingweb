@@ -5,9 +5,11 @@ var Message = Backbone.Model.extend({
 
         "userName" : "defaultUserName",
         "password" : "defaultPassword",
-        "date" : "0 0 0",	
+        "startDate":"0 0 0",
+        "endDate" : "0 0 0",	
+        "courseLengthInMinutes" : 0,
         "location" : "default default default",
-        "isMale" : true,
+        "gender" : 2,
         "content" : "defaultContent",
         "email" : "defaultEmail@default.com",
         "phone" : "1383838438",
