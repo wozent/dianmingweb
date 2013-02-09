@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Constructive | Premium Under Construction Template</title>
+
+	<link rel="stylesheet" href="css/reset.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/constructive.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/colorbox.css" type="text/css" media="all" />
+
+	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+	<script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="js/jquery.countdown.pack.js" type="text/javascript" ></script>
+	<script src="js/jquery.tweet.js" type="text/javascript"></script>
+	<script src="js/jquery.tools.min.js" type="text/javascript"></script>
+	<script src="js/jquery.colorbox.js" type="text/javascript"></script>
+	<script src="js/jquery.activity-indicator-1.0.0.min.js" /></script>
+
+	<script>
+	// COUNTDOWN CONFIGURATION
+		$(function () {
+			var targetDate = new Date("02/01/2013 00:01");
+			$('.countdown').countdown({
+					until: targetDate, 
+					format: "DHMS",
+					layout: '<ul class="clock">{d<}<li class="days"><span class="desc">{dn}</span></li>{d>}{h<}<li class="hours"><span class="desc">{hnn}</span></li>{h>}{m<}<li class="minutes"><span class="desc">{mnn}</span></li>{m>}{s<}<li class="seconds"><span class="desc">{snn}</span></li>{s>}</ul>',
+					onTick: everySec,
+				});
+		});
+
+		function everySec(periods) {
+			$('.days').attr('class', 'days d' + 56);
+			$('.hours').attr('class', 'hours h' + periods[4]);
+			$('.minutes').attr('class', 'minutes m' + periods[5]);
+			$('.seconds').attr('class', 'seconds s' + periods[6]);
+		};
+	</script>
+
+	<script type='text/javascript'>
+	// TWITTER FEED CONFIGURATION
+	    $(function($){
+	        $(".tweet").tweet({
+	            username: "webdesignplanet",
+	            join_text: "auto",
+	            avatar_size: 32,
+	            count: 2,
+	            loading_text: "loading tweets..."
+	        });
+	    });
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//Setting trigger, content and dimensions of contact box overlay
+			$(".contactustrigger").colorbox({width:"470px", height:"630px", transition: 'none', speed:'50', inline:true, href:"#contactus"}).fadeIn(100);
+			$(".conemail").colorbox({width:"470px", height:"630px", transition: 'none', speed:'50', inline:true, href:"#contactus"}).fadeIn(100);
+		});
+	</script>
+
+	<script type="text/javascript">
+		//CONTACT US FORM
+		$(document).ready(function(){
+		//submittimg contact us form
+		$('.contactUsForm').submit( function(){
+			//validating the form
+			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			var contactemail = document.getElementById('email-contactus');
+			if (!filter.test(contactemail.value)) {	$('#email-contactus').css({background: '#f99', color: '#fff'});	} else {$('#email-contactus').css({background: '#fff', color: '#868686'});}
+			if (document.cform.name.value == "") { $('#name').css({background: '#f99', color: '#fff'}); } else {$('#name').css({background: '#fff', color: '#868686'});}
+			if (document.cform.message.value == "") { $('#message').css({background: '#f99', color: '#fff'}); } else {$('#message').css({background: '#fff', color: '#868686'});}
+			if ((document.cform.name.value == "") || (!filter.test(contactemail.value)) || (document.cform.message.value == "")){return false;} 
+			if ((document.cform.name.value != "") && (filter.test(contactemail.value)) && (document.cform.message.value != "")) {
+				$('p.intro').css({background: 'none'});
+				$('p.intro').activity({segments: 8, steps: 5, opacity: 0.3, width: 5, space: 0, length: 7, color: '#0b0b0b', speed: 2});
+				//send ajax request
+				$.post('contactus.html',{
+					contactname:$('#name').val(),
+					contactemail:$('#email-contactus').val(),
+					message:$('#message').val()},
+					function(data){
+						$('p.intro').activity(false);
+						$('p.intro').css({background: 'url(img/envelope.png) no-repeat center', backgroundPosition: '0 -50px'});
+					});
+				//waits 2000, then closes the form and fades out
+				setTimeout('parent.$.fn.colorbox.close()', 2500);
+				//stay on the page
+				return false;
+			} 
+		});
+	});
+	</script>
+
+</head>
+
+<body class="blue">
+<div class="header"> <div id="logozghdm"></div></div>
+   
+    <div class="countdown">
+    </div><!-- end .countdown -->
+    <div class="paragraph">
+    	<h1>您正在尝试进入<strong>中国好点名</strong>，目前我们正在完善我们的网站。<br> 如果您有兴趣参加我们的<strong>Alpha测试</strong>，请联系我们。</h1>
+		    </div><!-- end .paragraph -->
+			<h4 style="text-align:center; font-size:200%; padding-bottom:20px; font-weight:bold;">加入我们</h4>
+      
+            	<div style="text-align:center; font-size:130%; padding-bottom:5px; margin-bottom: 10px">如果你对我们的项目感兴趣，想加入我们的CO-OP合作项目，请猛击 <a href="mailto:uwse@me.com">这里</a> 找马修大叔。<br><br>当然，你也可以发送一条短信或者电话 <a href="#">1-226-622-2222</a> 联系卡修大叔。<br><br>我们也强烈建议你联系麦克大叔或西蒙大叔。大叔们的聚集地在203 Lester Waterloo，你，值得拥有。<br></div>
+            	<div style="text-align:center;">Simon Jiang | Matthew Yang | Michael Xiao | Lucas Wang</div>
+            	<div style="height:30px;"></div>
+
+	</body><!-- end body -->
+</html>
